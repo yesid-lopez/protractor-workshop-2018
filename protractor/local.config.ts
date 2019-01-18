@@ -9,7 +9,7 @@ export const config: Config = {
   getPageTimeout: 1000,
 
   onPrepare: () => {
-  browser.ignoreSynchronization = true;
-  reporter();
+    browser.ignoreSynchronization = true;
+    reporter();
   }
 };
