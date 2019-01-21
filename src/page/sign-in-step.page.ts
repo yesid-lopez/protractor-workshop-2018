@@ -11,7 +11,7 @@ export class SignInStepPage {
     this.loginButton = $('#SubmitLogin > span');
   }
 
-  public async fillEmail(email, psswd): Promise <void> {
+  public async login(email, psswd): Promise <void> {
     await this.emailInput.sendKeys(email);
     await this.psswdInput.sendKeys(psswd);
     await this.loginButton.click();
