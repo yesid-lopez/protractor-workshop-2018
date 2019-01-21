@@ -25,9 +25,7 @@ describe('Buy a t-shirt', () => {
     await productAddedModalPage.goToCheckoutButton();
     await summaryStepPage.goToCheckoutButton();
 
-    await signInStepPage.fillEmail('aperdomobo@gmail.com');
-    await signInStepPage.fillPasswd('WorkshopProtractor');
-    await signInStepPage.goToLoginButton();
+    await signInStepPage.login('aperdomobo@gmail.com', 'WorkshopProtractor');
 
     await addressStepPage.goToCheckoutButton();
 
