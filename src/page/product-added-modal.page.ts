@@ -7,4 +7,7 @@ export class ProductAddedModalPage {
   public async goToCheckoutButton(): Promise <void> {
     await this.proceedToCheckoutButton.click();
   }
+  public getCheckoutButton(): ElementFinder {
+    return this.proceedToCheckoutButton;
+  }
 }
