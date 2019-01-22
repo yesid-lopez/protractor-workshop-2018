@@ -1,4 +1,4 @@
-import { $, ElementFinder, ExpectedConditions } from 'protractor';
+import { $, ElementFinder } from 'protractor';
 
 export class AddressStepPage {
   private checkoutButton: ElementFinder;
