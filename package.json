@@ -37,6 +37,7 @@
   "devDependencies": {
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "^10.12.18",
+    "jasmine-awesome-report": "0.0.3",
     "typescript": "^3.2.2"
   }
 }
