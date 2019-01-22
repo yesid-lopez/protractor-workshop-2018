@@ -6,14 +6,11 @@ export class ShippingStepPage {
 
   constructor () {
     this.agreementCheckBox = $('#cgv');
-    this.checkoutButton = $('#form > p > button > span');
+    this.checkoutButton = $('button[name="processCarrier"]');
   }
 
-  public async checkAgreement(): Promise<void> {
+  public async chooseShippingOption(): Promise<void> {
     await this.agreementCheckBox.click();
-  }
-
-  public async goToCheckoutButton(): Promise<void> {
     await this.checkoutButton.click();
   }
 }

@@ -22,15 +22,9 @@ describe('Buy a t-shirt', () => {
     await productListPage.goToCardButton();
     await productAddedModalPage.goToCheckoutButton();
     await summaryStepPage.goToCheckoutButton();
-
     await signInStepPage.login('aperdomobo@gmail.com', 'WorkshopProtractor');
-
     await addressStepPage.goToCheckoutButton();
-
-    await shippingStepPage.checkAgreement();
-
-    await shippingStepPage.goToCheckoutButton();
-
+    await shippingStepPage.chooseShippingOption();
     await paymentStepPage.goToPayByBankButton();
     await bankPaymentPage.goToConfirmationButton();
 
