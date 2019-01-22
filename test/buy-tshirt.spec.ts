@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions } from 'protractor';
+import { browser } from 'protractor';
 import { MenuContentPage, ProductListPage, ProductAddedModalPage,
    SummaryStepPage, SignInStepPage, AddressStepPage, ShippingStepPage,
   PaymentStepPage,  BankPaymentPage, OrderSummaryPage} from '../src/page';
@@ -20,8 +20,6 @@ describe('Buy a t-shirt', () => {
     await browser.get('http://automationpractice.com/');
     await menuContentPage.goToTShirtMenu();
     await productListPage.goToCardButton();
-    await browser.wait(
-      ExpectedConditions.elementToBeClickable(productAddedModalPage.getCheckoutButton()), 3000);
     await productAddedModalPage.goToCheckoutButton();
     await summaryStepPage.goToCheckoutButton();
 
