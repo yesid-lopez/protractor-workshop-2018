@@ -9,8 +9,8 @@ export let reporter = () => {
   }));
 
   const config = {
-    fullPath: 'awesome-report',
-    fileName: 'report',
+    fullPath: 'reports',
+    fileName: 'awesome',
     merge: true
   };
   jasmine.getEnv().addReporter(AwesomeReport.getReport(config));
