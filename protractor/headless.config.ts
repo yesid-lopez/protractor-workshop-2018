@@ -7,10 +7,11 @@ export const config: Config = {
   specs: ['../test/**/*.spec.js'],
   SELENIUM_PROMISE_MANAGER:false,
   getPageTimeout: 30000,
+
   onPrepare: () => {
     browser.ignoreSynchronization = true;
     reporter();
-    browser.manage().timeouts().implicitlyWait(3000);
+    browser.manage().timeouts().implicitlyWait(0);
   },
   capabilities: {
     browserName: 'chrome',
