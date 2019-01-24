@@ -5,9 +5,14 @@ describe('Given a protractor example page', () => {
   beforeAll(async () => {
     await browser.get('https://www.toolsqa.com/iframe-practice-page/');
   });
-  it('Then should change the frame', async () => {
-    const iFramePage = new IFramePage();
-    await iFramePage.setFormFrameHeight(250);
-    await expect(iFramePage.getFormFrameHeight()).toBe('250');
+  describe('When you want to change the frame height', () => {
+    beforeAll(async () => {
+      const iFramePage = new IFramePage();
+      await iFramePage.setFormFrameHeight(250);
+    });
+    it('Then it should change' , async () => {
+      const iFramePage = new IFramePage();
+      await expect(iFramePage.getFormFrameHeight()).toBe('250');
+    });
   });
 });
