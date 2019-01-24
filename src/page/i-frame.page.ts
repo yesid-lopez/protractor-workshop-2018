@@ -8,6 +8,14 @@ export class IFramePage {
     this.iframe1 = $('#IF1');
   }
 
+  public async switchToFrame(): Promise<void> {
+    await browser.switchTo().frame(this.iframe1.getWebElement());
+  }
+
+  public async switchToMainPage(): Promise<void> {
+    await browser.switchTo().defaultContent();
+  }
+
   public setFormFrameHeight(height: number): promise.Promise<void> {
     return browser.executeScript(`arguments[0].height = ${height};`, this.iframe1);
   }
