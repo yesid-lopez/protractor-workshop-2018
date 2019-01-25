@@ -3,9 +3,11 @@ import { $, browser, ElementFinder, promise } from 'protractor';
 export class IFramePage {
 
   private iframe1:ElementFinder;
+  private frameTitle:ElementFinder;
 
   constructor() {
     this.iframe1 = $('#IF1');
+    this.frameTitle = $('.page-title-head h1');
   }
 
   public async switchToFrame(): Promise<void> {
@@ -23,4 +25,9 @@ export class IFramePage {
   public async getFormFrameHeight(): Promise<string> {
     return await this.iframe1.getAttribute('height');
   }
+
+  public async getTitleMainFrame(): Promise<string> {
+    return this.frameTitle.getText();
+  }
+
 }
