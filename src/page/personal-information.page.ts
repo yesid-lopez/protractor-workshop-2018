@@ -1,5 +1,4 @@
 import { ElementFinder, $, $$, ElementArrayFinder  } from 'protractor';
-
 export class PersonalInformationPage {
 
   private firstNameInput: ElementFinder;
@@ -10,9 +9,7 @@ export class PersonalInformationPage {
   private professionCheckbox: ElementArrayFinder;
   private continentSelectOne: ElementArrayFinder;
   private commandsSelectMultiple: ElementArrayFinder;
-
-  private buttonButton:ElementFinder;
-  private confirmationText:ElementFinder;
+  private imageInput: ElementFinder;
 
   constructor() {
     this.firstNameInput = $('[name="firstname"]');
@@ -23,7 +20,7 @@ export class PersonalInformationPage {
     this.toolsCheckbox = $$('[name="tool"]');
     this.continentSelectOne = $$('#continents option');
     this.commandsSelectMultiple = $$('#selenium_commands option');
-    this.buttonButton = $('#submit');
+    this.imageInput = $('#photo');
   }
 
   public async fillForm(data : {
@@ -34,7 +31,8 @@ export class PersonalInformationPage {
     profession: string[],
     tools: string[],
     continent: string,
-    commands: string[] }):Promise<void> {
+    commands: string[],
+    file: string}):Promise<void> {
     await this.fillInputs(data.firstName, data.lastName);
     await this.fillRadioButtons(data.sex, data.experience);
     await this.fillCheckBoxes(data.tools, data.profession);
@@ -43,7 +41,9 @@ export class PersonalInformationPage {
     await this.commandsSelectMultiple.filter(element =>
       element.getText().then(text =>
         data.commands.some(command => command === text))).click();
-    await this.buttonButton.click();
+    const path = require('path');
+    const absolutePath = path.resolve(__dirname, data.file);
+    await this.imageInput.sendKeys(absolutePath);
   }
   private async fillCheckBoxes(tools:string[], professions:string[]):Promise<void> {
     await this.toolsCheckbox.filter(element =>
@@ -69,9 +69,7 @@ export class PersonalInformationPage {
     await this.lastNameInput.sendKeys(lastName);
   }
 
-  public async getConfirmationText():Promise<string> {
-    this.confirmationText = $('.wpb_wrapper h1');
-    return await this.confirmationText.getText();
+  public async getValueImage():Promise<string> {
+    return await this.imageInput.getAttribute('value');
   }
-
 }
