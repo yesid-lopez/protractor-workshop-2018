@@ -1,4 +1,4 @@
-import { ElementFinder, $, $$, ElementArrayFinder  } from 'protractor';
+import { ElementFinder, $, $$, ElementArrayFinder, browser  } from 'protractor';
 import { DownloadService } from '../service/download.service';
 export class PersonalInformationPage {
 
@@ -40,6 +40,8 @@ export class PersonalInformationPage {
     commands: string[],
     file: string,
     downloadFile: boolean}):Promise<void> {
+    const banner = $('cp-info-bar-body');
+    browser.executeScript('arguments[0].click();', banner.getWebElement());
 
     await this.fillInputs(data.firstName, data.lastName);
     await this.fillRadioButtons(data.sex, data.experience);
