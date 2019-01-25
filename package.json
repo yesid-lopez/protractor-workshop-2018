@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/leonleo997/protractor-workshop-2018#readme",
   "dependencies": {
+    "@types/isomorphic-fetch": "0.0.34",
     "jasmine-spec-reporter": "^4.2.1",
     "protractor": "^5.4.2",
     "tslint": "^5.12.1",

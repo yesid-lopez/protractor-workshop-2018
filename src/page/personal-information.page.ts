@@ -1,4 +1,5 @@
 import { ElementFinder, $, $$, ElementArrayFinder  } from 'protractor';
+import { DownloadService } from '../service/download.service';
 export class PersonalInformationPage {
 
   private firstNameInput: ElementFinder;
@@ -9,7 +10,9 @@ export class PersonalInformationPage {
   private professionCheckbox: ElementArrayFinder;
   private continentSelectOne: ElementArrayFinder;
   private commandsSelectMultiple: ElementArrayFinder;
+
   private imageInput: ElementFinder;
+  private downloadLink: ElementArrayFinder;
 
   constructor() {
     this.firstNameInput = $('[name="firstname"]');
@@ -20,7 +23,10 @@ export class PersonalInformationPage {
     this.toolsCheckbox = $$('[name="tool"]');
     this.continentSelectOne = $$('#continents option');
     this.commandsSelectMultiple = $$('#selenium_commands option');
+
     this.imageInput = $('#photo');
+    this.downloadLink =
+    $$('div.control-group a');
   }
 
   public async fillForm(data : {
@@ -32,7 +38,9 @@ export class PersonalInformationPage {
     tools: string[],
     continent: string,
     commands: string[],
-    file: string}):Promise<void> {
+    file: string,
+    downloadFile: boolean}):Promise<void> {
+
     await this.fillInputs(data.firstName, data.lastName);
     await this.fillRadioButtons(data.sex, data.experience);
     await this.fillCheckBoxes(data.tools, data.profession);
@@ -41,10 +49,26 @@ export class PersonalInformationPage {
     await this.commandsSelectMultiple.filter(element =>
       element.getText().then(text =>
         data.commands.some(command => command === text))).click();
+    // Upload Image
     const path = require('path');
     const absolutePath = path.resolve(__dirname, data.file);
     await this.imageInput.sendKeys(absolutePath);
+    // Download File
+    if (data.downloadFile) {
+      this.download();
+    }
   }
+
+  private download(): void {
+    const downloadService:DownloadService = new DownloadService();
+    const downloadElement = this.downloadLink.filter((element) => {
+      return element.getText().then(text => text === 'Test File to Download');
+    }).first();
+    downloadElement.getAttribute('href')
+    .then(link => downloadService.downloadFile(link, 'archivo.txt'));
+
+  }
+
   private async fillCheckBoxes(tools:string[], professions:string[]):Promise<void> {
     await this.toolsCheckbox.filter(element =>
       element.getAttribute('value').then(
