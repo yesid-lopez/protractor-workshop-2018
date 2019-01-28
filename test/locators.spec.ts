@@ -16,7 +16,7 @@ const userWithDownload = {
     'Switch Commands',
     'Wait Commands',
     'WebElement Commands'],
-  file: '../../../resources/image.png',
+  file: 'resources/image.png',
   downloadFile: true
 };
 const userWithoutDownload = {
@@ -33,7 +33,7 @@ const userWithoutDownload = {
     'Switch Commands',
     'Wait Commands',
     'WebElement Commands'],
-  file: '../../../resources/image.png',
+  file: 'resources/image.png',
   downloadFile: true
 };
 

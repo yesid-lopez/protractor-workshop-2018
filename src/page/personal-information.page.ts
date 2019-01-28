@@ -1,5 +1,9 @@
-import { ElementFinder, $, $$, ElementArrayFinder  } from 'protractor';
+import { ElementFinder, $, $$, ElementArrayFinder, browser  } from 'protractor';
 import { DownloadService } from '../service/download.service';
+import { resolve } from 'path';
+import * as remote from 'selenium-webdriver/remote';
+import { existsSync } from 'fs';
+
 export class PersonalInformationPage {
 
   private firstNameInput: ElementFinder;
@@ -52,9 +56,13 @@ export class PersonalInformationPage {
       element.getText().then(text =>
         data.commands.some(command => command === text))).click();
     // Upload Image
-    const path = require('path');
-    const absolutePath = path.resolve(__dirname, data.file);
-    await this.imageInput.sendKeys(absolutePath);
+    const path = resolve(process.cwd(), data.file);
+    console.log(path);
+    if (existsSync(path)) {
+      await browser.setFileDetector(new remote.FileDetector());
+      await this.imageInput.sendKeys(path);
+      await browser.setFileDetector(undefined);
+    }
     // Download File
     if (data.downloadFile) {
       this.download();
